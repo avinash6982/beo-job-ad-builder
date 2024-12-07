@@ -1,3 +1,0 @@
-1. Setup Tailwind
-2. Setup routing
-3. Setup app level context for data storage
