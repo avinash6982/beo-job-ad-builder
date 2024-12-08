@@ -1,16 +1,14 @@
-import { useAppContext } from "./AppDataContext";
-import "./App.css";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
-function App() {
-  const { data } = useAppContext();
+import Home from "./pages/Home";
+
+const App = () => {
   return (
-    <>
-      <div>
-        {console.log(data)}
-        <h1>Job Ad Builder</h1>
-      </div>
-    </>
+    <DndProvider backend={HTML5Backend}>
+      <Home />
+    </DndProvider>
   );
-}
+};
 
 export default App;
