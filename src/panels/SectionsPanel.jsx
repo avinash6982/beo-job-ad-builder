@@ -45,33 +45,35 @@ const SectionsPanel = ({ loading }) => {
     <div className="bg-white shadow rounded p-2">
       <div className="flex flex-row justify-between items-center">
         <h2 className="text-lg font-semibold mb-4">Sections</h2>
-        <div className="flex flex-row">
-          {editMode ? (
-            <>
-              <div
-                className="cursor-pointer w-8 h-8 hover:bg-green-300 rounded-full flex items-center justify-center transition-all duration-200 mr-2"
-                onClick={() => setEditMode(false)}
-              >
-                <img src={checkIcon} width={16} alt="Delete" />
-              </div>
-            </>
-          ) : (
-            <>
-              <div
-                className="cursor-pointer w-8 h-8 hover:bg-blue-300 rounded-full flex items-center justify-center transition-all duration-200 mr-2"
-                onClick={() => setEditMode(true)}
-              >
-                <img src={editIcon} width={16} alt="Delete" />
-              </div>
-              <div
-                className="cursor-pointer w-8 h-8 hover:bg-green-300 rounded-full flex items-center justify-center transition-all duration-200"
-                onClick={() => setAddSectionModalVisible(true)}
-              >
-                <img src={plusIcon} width={16} alt="Delete" />
-              </div>
-            </>
-          )}
-        </div>
+        {sections.length > 0 && (
+          <div className="flex flex-row">
+            {editMode ? (
+              <>
+                <div
+                  className="cursor-pointer w-8 h-8 hover:bg-green-300 rounded-full flex items-center justify-center transition-all duration-200 mr-2"
+                  onClick={() => setEditMode(false)}
+                >
+                  <img src={checkIcon} width={16} alt="Delete" />
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  className="cursor-pointer w-8 h-8 hover:bg-blue-300 rounded-full flex items-center justify-center transition-all duration-200 mr-2"
+                  onClick={() => setEditMode(true)}
+                >
+                  <img src={editIcon} width={16} alt="Delete" />
+                </div>
+                <div
+                  className="cursor-pointer w-8 h-8 hover:bg-green-300 rounded-full flex items-center justify-center transition-all duration-200"
+                  onClick={() => setAddSectionModalVisible(true)}
+                >
+                  <img src={plusIcon} width={16} alt="Delete" />
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="flex-grow flex flex-col justify-center items-center  ">
