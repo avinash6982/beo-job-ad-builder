@@ -1,18 +1,12 @@
-import { useDraggable } from "@dnd-kit/core";
-import { CSS } from "@dnd-kit/utilities";
+import Draggable from "../hoc/Draggable";
 
-function SectionItem() {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: "unique-id",
-  });
-  const style = {
-    transform: CSS.Translate.toString(transform),
-  };
-
+function SectionItem({ data, id }) {
   return (
-    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      Hi
-    </button>
+    <Draggable data={data}>
+      <h5 className="text-sm font-semibold tracking-tight text-gray-900">
+        {data.title}
+      </h5>
+    </Draggable>
   );
 }
 
