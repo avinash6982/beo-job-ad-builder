@@ -7,13 +7,41 @@ import {
 import Droppable from "../hoc/Droppable";
 import { useAppContext } from "../AppDataContext";
 import editIcon from "../assets/edit-text.png";
-import deleteIcon from "../assets/trash.png";
 import checkIcon from "../assets/check.png";
-import plusIcon from "../assets/plus.png";
+import closeIcon from "../assets/close.png";
+import AddSectionFormModal from "../components/AddSectionForm";
 
 const BuilderPanel = () => {
   const [editMode, setEditMode] = useState(false);
-  const { activeSections, setActiveSections } = useAppContext();
+  const { activeSections, setActiveSections, setSections } = useAppContext();
+  const [editSectionModal, setEditSectionModal] = useState(false);
+
+  function handleSectionEdit(data) {
+    setEditSectionModal(data);
+  }
+  function handleSectionDelete(data) {
+    setActiveSections((prev) =>
+      prev.filter((section) => section.id !== data.id)
+    );
+    setSections((prev) => [...prev, data]);
+  }
+
+  const EditActions = ({ section }) => (
+    <div className="flex flex-row space-x-2">
+      <div
+        className="cursor-pointer p-1 hover:bg-blue-300 rounded-full flex items-center justify-center transition-all duration-200"
+        onClick={() => handleSectionEdit(section)}
+      >
+        <img src={editIcon} width={14} alt="Edit" />
+      </div>
+      <div
+        className="cursor-pointer p-1 hover:bg-red-300 rounded-full flex items-center justify-center transition-all duration-200"
+        onClick={() => handleSectionDelete(section)}
+      >
+        <img src={closeIcon} width={14} alt="Delete" />
+      </div>
+    </div>
+  );
 
   return (
     <div className="bg-white shadow rounded p-4 flex flex-col">
@@ -41,9 +69,8 @@ const BuilderPanel = () => {
         >
           {activeSections.map((section, index) => (
             <SectionItem
-              extras="remove"
-              extrasAction={setActiveSections}
-              id={section.id}
+              editMode={editMode}
+              actions={<EditActions section={section} />}
               data={section}
               key={index}
             />
@@ -59,6 +86,18 @@ const BuilderPanel = () => {
           </Droppable>
         </div>
       </div>
+      {!!editSectionModal && (
+        <AddSectionFormModal
+          edit={true}
+          data={editSectionModal}
+          onClose={() => setEditSectionModal(null)}
+          onSuccess={(data) => {
+            setActiveSections((prev) =>
+              prev.map((section) => (section.id === data.id ? data : section))
+            );
+          }}
+        />
+      )}
     </div>
   );
 };

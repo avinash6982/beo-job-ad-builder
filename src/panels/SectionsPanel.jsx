@@ -42,7 +42,7 @@ const SectionsPanel = ({ loading }) => {
   );
 
   return (
-    <div className="bg-white shadow rounded p-2">
+    <div className="bg-white shadow rounded p-4">
       <div className="flex flex-row justify-between items-center">
         <h2 className="text-lg font-semibold mb-4">Sections</h2>
         {sections.length > 0 && (
