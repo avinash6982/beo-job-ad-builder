@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const AddSectionFormModal = ({ onClose, onSuccess, edit, data }) => {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title.trim() && description.trim()) {
+    if (name.trim() && description.trim()) {
       const newSection = {
         id: edit ? data.id : uuidv4(), // Generate a unique ID
-        title,
+        name,
         description,
       };
       onSuccess(newSection);
@@ -22,7 +22,7 @@ const AddSectionFormModal = ({ onClose, onSuccess, edit, data }) => {
 
   useEffect(() => {
     if (edit && !!data) {
-      setTitle(data?.title);
+      setName(data?.name);
       setDescription(data?.description);
     }
   }, [edit, data]);
@@ -53,8 +53,8 @@ const AddSectionFormModal = ({ onClose, onSuccess, edit, data }) => {
               type="text"
               className="mt-1 block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Enter section title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>

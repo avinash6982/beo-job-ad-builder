@@ -27,13 +27,13 @@ const SectionsPanel = () => {
   const EditActions = ({ section }) => (
     <div className="flex flex-row space-x-2">
       <div
-        className="cursor-pointer p-2 hover:bg-blue-300 rounded-full flex items-center justify-center transition-all duration-200"
+        className="cursor-pointer p-1 hover:bg-blue-300 rounded-full flex items-center justify-center transition-all duration-200"
         onClick={() => handleSectionEdit(section)}
       >
         <img src={editIcon} width={14} alt="Edit" />
       </div>
       <div
-        className="cursor-pointer p-2 hover:bg-red-300 rounded-full flex items-center justify-center transition-all duration-200"
+        className="cursor-pointer p-1 hover:bg-red-300 rounded-full flex items-center justify-center transition-all duration-200"
         onClick={() => handleSectionDelete(section)}
       >
         <img src={deleteIcon} width={14} alt="Delete" />
@@ -75,16 +75,15 @@ const SectionsPanel = () => {
       </div>
 
       <div className="flex-grow flex flex-col justify-center items-center">
-        <Droppable behavior="source" id={"sections-dropzone"}>
-          {sections.map((section, index) => (
-            <SectionItem
-              editMode={editMode}
-              actions={<EditActions section={section} />}
-              data={section}
-              key={index}
-            />
-          ))}
-        </Droppable>
+        {sections.map((section, index) => (
+          <SectionItem
+            editMode={editMode}
+            actions={<EditActions section={section} />}
+            data={section}
+            key={index}
+          />
+        ))}
+        <Droppable id={"sections-dropzone"}>Drop items back here.</Droppable>
       </div>
       {addSectionModalVisible && (
         <AddSectionFormModal

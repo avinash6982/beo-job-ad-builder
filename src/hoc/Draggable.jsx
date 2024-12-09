@@ -22,7 +22,7 @@ function Draggable(props) {
 
   return (
     <button
-      className="w-full p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 mb-2 cursor-grab select-none"
+      className="w-full p-3 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 mb-2 cursor-grab select-none"
       ref={(node) => {
         setNodeRef(node); // Make it draggable
         setDroppableRef(node); // Make it droppable
