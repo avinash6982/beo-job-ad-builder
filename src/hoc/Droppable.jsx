@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 
-// hoc for dropzone component
+// HOC for dropzone component
 function Droppable(props) {
   const { isOver, setNodeRef } = useDroppable({
     id: props.id,
@@ -23,7 +23,7 @@ function Droppable(props) {
     return (
       <div
         ref={setNodeRef}
-        className="p-2 pb-0 rounded flex flex-col h-full w-full min-h-[100px]"
+        className="p-2 pb-0 rounded flex flex-col h-full w-full min-h-[100px] pb-20"
         style={sourceStyle}
       >
         {props.children.length > 0 ? (

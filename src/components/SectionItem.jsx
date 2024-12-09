@@ -1,6 +1,6 @@
 import Draggable from "../hoc/Draggable";
 
-function SectionItem({ data, id }) {
+function SectionItem({ data }) {
   return (
     <Draggable data={data}>
       <h5 className="text-sm font-semibold tracking-tight text-gray-900">
