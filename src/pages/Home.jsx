@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { DndContext } from "@dnd-kit/core";
-import SectionItem from "../components/SectionItem";
-import {
-  arrayMove,
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import Droppable from "../hoc/Droppable";
+import { arrayMove } from "@dnd-kit/sortable";
 import { initialSections } from "../api/initialData";
 import SectionsPanel from "../panels/SectionsPanel";
 import { useAppContext } from "../AppDataContext";
+import PreviewPanel from "../panels/PreviewPanel";
+import BuilderPanel from "../panels/BuilderPanel";
 
 const HomeScreen = () => {
   const { sections, setSections, activeSections, setActiveSections } =
@@ -74,55 +70,10 @@ const HomeScreen = () => {
         <SectionsPanel />
 
         {/* Builder Panel */}
-        <div className="bg-white shadow rounded p-4 flex flex-col">
-          <div>
-            <h2 className="text-lg font-semibold mb-4">Builder</h2>
-          </div>
-          <div className="flex flex-col flex-grow">
-            <h4 className="mb-2">Dropped Items</h4>
-
-            <SortableContext
-              items={activeSections}
-              strategy={verticalListSortingStrategy}
-            >
-              {activeSections.map((section, index) => (
-                <SectionItem
-                  extras="remove"
-                  extrasAction={setActiveSections}
-                  id={section.id}
-                  data={section}
-                  key={index}
-                />
-              ))}
-            </SortableContext>
-
-            {/* {activeSections.map((section, index) => (
-              <SectionItem id={section.id} data={section} key={index} />
-            ))} */}
-            <div className="flex-grow flex justify-center items-center">
-              <Droppable id={"builder-dropzone"}>
-                <div>Drop Items Here</div>
-              </Droppable>
-            </div>
-          </div>
-        </div>
+        <BuilderPanel />
 
         {/* Preview Settings Panel */}
-        <div className="bg-white shadow rounded p-4">
-          <h2 className="text-lg font-semibold mb-4">Preview Settings</h2>
-          <div className="mb-4">
-            <h3 className="font-medium">View Modes</h3>
-            <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600">
-              Compact
-            </button>
-            <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600">
-              Expanded
-            </button>
-          </div>
-          <button className="mt-4 w-full px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600">
-            Export
-          </button>
-        </div>
+        <PreviewPanel />
       </div>
     </DndContext>
   );
