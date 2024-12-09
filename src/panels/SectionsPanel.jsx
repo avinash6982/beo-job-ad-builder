@@ -8,7 +8,7 @@ import { useState } from "react";
 import AddSectionFormModal from "../components/AddSectionForm";
 import { useAppContext } from "../AppDataContext";
 
-const SectionsPanel = () => {
+const SectionsPanel = ({ loading }) => {
   const { sections, setSections } = useAppContext();
   const [addSectionModalVisible, setAddSectionModalVisible] = useState(false);
   const [editSectionModal, setEditSectionModal] = useState(null);
@@ -74,7 +74,18 @@ const SectionsPanel = () => {
         </div>
       </div>
 
-      <div className="flex-grow flex flex-col justify-center items-center">
+      <div className="flex-grow flex flex-col justify-center items-center  ">
+        {loading &&
+          [0, 0, 0, 0].map((_, index) => (
+            <button
+              key={index}
+              className="w-full p-3 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 mb-2 cursor-grab select-none"
+            >
+              <div className="flex justify-between">
+                <h4 className="p-2 text-sm font-semibold tracking-tight text-gray-900 bg-gray-300 animate-pulse w-32 h-6 rounded"></h4>
+              </div>
+            </button>
+          ))}
         {sections.map((section, index) => (
           <SectionItem
             editMode={editMode}

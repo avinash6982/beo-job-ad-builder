@@ -1,18 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DndContext } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-import { initialSections } from "../api/initialData";
 import SectionsPanel from "../panels/SectionsPanel";
 import { useAppContext } from "../AppDataContext";
 import PreviewPanel from "../panels/PreviewPanel";
 import BuilderPanel from "../panels/BuilderPanel";
+import { getSections } from "../api";
 
 const HomeScreen = () => {
+  const [loading, setLoading] = useState(true);
   const { sections, setSections, activeSections, setActiveSections } =
     useAppContext();
 
   useEffect(() => {
-    setSections(initialSections);
+    getSections()
+      .then((res) => {
+        if (res.status === "success") setSections(res.data);
+      })
+      .finally((_) => {
+        setLoading(false);
+      });
   }, []);
 
   function handleDragEnd({ active, over }) {
@@ -67,7 +74,7 @@ const HomeScreen = () => {
     <DndContext onDragEnd={handleDragEnd}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 md:h-screen">
         {/* Sections Panel */}
-        <SectionsPanel />
+        <SectionsPanel loading={loading} />
 
         {/* Builder Panel */}
         <BuilderPanel />

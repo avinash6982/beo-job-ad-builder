@@ -16,7 +16,7 @@ function SectionItem({ data, editMode, actions }) {
   return (
     <Draggable data={data}>
       <div className="flex justify-between">
-        <h4 className="p-1 text-sm font-semibold tracking-tight text-gray-900">
+        <h4 className="p-1 text-sm font-semibold tracking-tight text-gray-900 truncate">
           {data.name}
         </h4>
       </div>
