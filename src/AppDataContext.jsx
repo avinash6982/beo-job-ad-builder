@@ -8,9 +8,31 @@ const AppContext = createContext();
 export const AppDataProvider = ({ children }) => {
   const [sections, setSections] = useState([]);
   const [activeSections, setActiveSections] = useState([]);
+  const [colorScheme, setColorScheme] = useState({
+    topbarColor: "#333",
+    jobPostingBackgroundColor: "#4f46e5",
+  });
+  const [textContent, setTextContent] = useState({
+    topbarText: "Job Company",
+    title: "Join Our Team!",
+    subTitle: "We are looking for talented individuals.",
+  });
+  const [logo, setLogo] = useState(null);
+
   return (
     <AppContext.Provider
-      value={{ sections, setSections, activeSections, setActiveSections }}
+      value={{
+        sections,
+        setSections,
+        activeSections,
+        setActiveSections,
+        colorScheme,
+        setColorScheme,
+        logo,
+        setLogo,
+        textContent,
+        setTextContent,
+      }}
     >
       {children}
     </AppContext.Provider>
