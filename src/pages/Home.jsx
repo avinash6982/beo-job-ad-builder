@@ -1,31 +1,23 @@
+import { useEffect, useState } from "react";
 import { DndContext } from "@dnd-kit/core";
 import SectionItem from "../components/SectionItem";
-import Droppable from "../hoc/Droppable";
-import { useState } from "react";
 import {
   arrayMove,
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-
-const initialSections = [
-  {
-    id: 1,
-    title: "Section 1",
-  },
-  {
-    id: 2,
-    title: "Section 2",
-  },
-  {
-    id: 3,
-    title: "Section 3",
-  },
-];
+import Droppable from "../hoc/Droppable";
+import { initialSections } from "../api/initialData";
+import SectionsPanel from "../panels/SectionsPanel";
+import { useAppContext } from "../AppDataContext";
 
 const HomeScreen = () => {
-  const [sections, setSections] = useState(initialSections);
-  const [activeSections, setActiveSections] = useState([]);
+  const { sections, setSections, activeSections, setActiveSections } =
+    useAppContext();
+
+  useEffect(() => {
+    setSections(initialSections);
+  }, []);
 
   function handleDragEnd({ active, over }) {
     // Get item which is currently being dragged
@@ -79,16 +71,7 @@ const HomeScreen = () => {
     <DndContext onDragEnd={handleDragEnd}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 md:h-screen">
         {/* Sections Panel */}
-        <div className="bg-white shadow rounded p-2">
-          <h2 className="text-lg font-semibold mb-4">Sections</h2>
-          <div className="flex-grow flex flex-col justify-center items-center">
-            <Droppable behavior="source" id={"sections-dropzone"}>
-              {sections.map((section, index) => (
-                <SectionItem data={section} key={index} />
-              ))}
-            </Droppable>
-          </div>
-        </div>
+        <SectionsPanel />
 
         {/* Builder Panel */}
         <div className="bg-white shadow rounded p-4 flex flex-col">
@@ -103,7 +86,13 @@ const HomeScreen = () => {
               strategy={verticalListSortingStrategy}
             >
               {activeSections.map((section, index) => (
-                <SectionItem id={section.id} data={section} key={index} />
+                <SectionItem
+                  extras="remove"
+                  extrasAction={setActiveSections}
+                  id={section.id}
+                  data={section}
+                  key={index}
+                />
               ))}
             </SortableContext>
 

@@ -6,9 +6,12 @@ const AppContext = createContext();
 
 // Provider component for the AppContext
 export const AppDataProvider = ({ children }) => {
-  const [data, setData] = useState({});
+  const [sections, setSections] = useState([]);
+  const [activeSections, setActiveSections] = useState([]);
   return (
-    <AppContext.Provider value={{ data, setData }}>
+    <AppContext.Provider
+      value={{ sections, setSections, activeSections, setActiveSections }}
+    >
       {children}
     </AppContext.Provider>
   );
