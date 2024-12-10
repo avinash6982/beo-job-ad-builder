@@ -67,25 +67,134 @@ const MoreSettings = ({ onClose }) => {
 
         {/* Modal Body */}
         <form onSubmit={handleSubmit} className="mt-4 space-y-6">
-          {/* Title Input */}
+          <div className="flex flex-col md:flex-row">
+            {/* Title Input */}
+            <div className="pr-2 flex-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Topbar Text
+              </label>
+              <input
+                type="text"
+                className="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Enter section title"
+                value={data.topbarText}
+                onChange={(e) =>
+                  setData((prev) => ({
+                    ...prev,
+                    topbarText: e.target.value,
+                  }))
+                }
+              />
+            </div>
+            {/* Title color Input */}
+            <div className="pr-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Topbar Color
+              </label>
+              <input
+                type="text"
+                className="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Enter section title"
+                value={data.topbarColor}
+                onChange={(e) =>
+                  setData((prev) => ({
+                    ...prev,
+                    topbarColor: e.target.value,
+                  }))
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row">
+            {/* Posting Title Input */}
+            <div className="pr-2 flex-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Posting Title Text
+              </label>
+              <input
+                type="text"
+                className="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Enter section title"
+                value={data.title}
+                onChange={(e) =>
+                  setData((prev) => ({
+                    ...prev,
+                    title: e.target.value,
+                  }))
+                }
+              />
+            </div>{" "}
+            {/* Posting Title Color */}
+            <div className="pr-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Posting Color
+              </label>
+              <input
+                type="text"
+                className="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Enter section title"
+                value={data.jobPostingBackgroundColor}
+                onChange={(e) =>
+                  setData((prev) => ({
+                    ...prev,
+                    jobPostingBackgroundColor: e.target.value,
+                  }))
+                }
+              />
+            </div>
+          </div>
+
+          {/* Posting subtitle Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Topbar Text
+              Posting Sub-title Text
             </label>
-            {console.warn(textContent.topbarText)}
             <input
               type="text"
               className="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Enter section title"
-              value={textContent.topbarText}
+              value={data.subTitle}
               onChange={(e) =>
-                setTextContent((prev) => ({
+                setData((prev) => ({
                   ...prev,
-                  topbarText: e.target.value,
+                  subTitle: e.target.value,
                 }))
               }
-              required
             />
+          </div>
+
+          {/* Logo upload */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Upload File
+            </label>
+            <div className="mt-1 flex items-center space-x-4">
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                Choose File
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                className="hidden"
+                accept=".pdf,.jpg,.png"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    setData((prev) => ({
+                      ...prev,
+                      logo: file,
+                      previewUrl: URL.createObjectURL(file),
+                    }));
+                  }
+                }}
+              />
+              {data.logo && (
+                <span className="text-sm text-gray-700">{data.logo.name}</span>
+              )}
+            </div>
           </div>
 
           {/* Modal Footer */}
