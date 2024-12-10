@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppContext } from "../AppDataContext";
 import settingsIcon from "../assets/settings.png";
 import MoreSettings from "../components/MoreSettings";
@@ -102,9 +102,17 @@ const PreviewPanel = () => {
 
           <!-- Dynamic Content Sections -->
           ${activeSections
-            .map(
-              (item) =>
-                `<div class="section">
+            .map((item) =>
+              logo && item.id === "company-info"
+                ? `<div class="section">
+                  ${item.html.replace(
+                    /<div class="w-16 h-16 bg-gray-200 rounded-lg mr-4"><\/div>/g,
+                    `<img src=${URL.createObjectURL(
+                      logo
+                    )} class="w-16 h-16 rounded mr-1" />`
+                  )}
+                </div>`
+                : `<div class="section">
                   ${item.html}
                 </div>`
             )
