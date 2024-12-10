@@ -1,21 +1,25 @@
-import SectionItem from "../components/SectionItem";
+import { useState } from "react";
+
+import { useAppContext } from "../AppDataContext";
 import Droppable from "../hoc/Droppable";
+import SectionItem from "../components/SectionItem";
+import AddSectionFormModal from "../components/AddSectionForm";
+
 import editIcon from "../assets/edit-text.png";
 import deleteIcon from "../assets/trash.png";
 import checkIcon from "../assets/check.png";
 import plusIcon from "../assets/plus.png";
-import { useState } from "react";
-import AddSectionFormModal from "../components/AddSectionForm";
-import { useAppContext } from "../AppDataContext";
 
 const SectionsPanel = ({ loading }) => {
   const { sections, setSections } = useAppContext();
   const [addSectionModalVisible, setAddSectionModalVisible] = useState(false);
   const [editSectionModal, setEditSectionModal] = useState(null);
   const [editMode, setEditMode] = useState(false);
+
   function handleSectionEdit(data) {
     setEditSectionModal(data);
   }
+
   function handleSectionDelete(data) {
     let userConfirmed = confirm(
       "Are you sure you want to delete this section?"

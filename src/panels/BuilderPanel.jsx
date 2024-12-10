@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import SectionItem from "../components/SectionItem";
 import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import Droppable from "../hoc/Droppable";
+
 import { useAppContext } from "../AppDataContext";
+import Droppable from "../hoc/Droppable";
+import SectionItem from "../components/SectionItem";
+import AddSectionFormModal from "../components/AddSectionForm";
+
 import editIcon from "../assets/edit-text.png";
 import checkIcon from "../assets/check.png";
 import closeIcon from "../assets/close.png";
-import AddSectionFormModal from "../components/AddSectionForm";
 
 const BuilderPanel = () => {
   const [editMode, setEditMode] = useState(false);

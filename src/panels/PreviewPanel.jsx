@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import { useAppContext } from "../AppDataContext";
-import settingsIcon from "../assets/settings.png";
 import MoreSettings from "../components/MoreSettings";
+
+import settingsIcon from "../assets/settings.png";
 
 const PreviewPanel = () => {
   const [isMobileView, setIsMobileView] = useState(false);

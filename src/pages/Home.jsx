@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { DndContext } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
+
 import SectionsPanel from "../panels/SectionsPanel";
 import { useAppContext } from "../AppDataContext";
 import PreviewPanel from "../panels/PreviewPanel";

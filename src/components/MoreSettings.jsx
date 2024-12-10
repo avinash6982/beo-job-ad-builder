@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+
 import { useAppContext } from "../AppDataContext";
 
 const MoreSettings = ({ onClose }) => {
