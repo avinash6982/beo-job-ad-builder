@@ -69,6 +69,7 @@ The **Job Ad Builder** application is a three-panel interface designed to help u
    ```bash
    git clone <repository-url>
    cd job-ad-builder
+   git checkout dev
    ```
 2. Install dependencies:
    ```bash
